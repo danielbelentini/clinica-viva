@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background: #FAFAFA;
+    color: #222222;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-sage text-white font-semibold text-sm tracking-wide px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-sage-dark active:scale-95 cursor-pointer border-0 inline-block;
+  }
+  .btn-outline {
+    @apply bg-transparent text-sage border-2 border-sage font-semibold text-sm tracking-wide px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-sage hover:text-white cursor-pointer inline-block;
+  }
+  .section-tag {
+    @apply text-sage font-semibold text-xs tracking-[0.2em] uppercase mb-3 block;
+  }
+  .section-title {
+    @apply font-bold text-neutral-800 leading-tight;
+  }
+}
