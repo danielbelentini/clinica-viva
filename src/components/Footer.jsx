@@ -41,7 +41,7 @@ export default function Footer() {
             href="https://wa.me/5511999921543"
             className="text-sage text-sm font-medium hover:text-sage-light transition-colors no-underline"
           >
-            (11) 99999-9999
+            (11) 99992-1543
           </a>
         </div>
       </div>
