@@ -65,15 +65,51 @@ function Card({ d }) {
   )
 }
 
+function Controls({ current, total, onChange }) {
+  return (
+    <div className="flex items-center justify-center gap-4 mt-8">
+      <button
+        onClick={() => onChange(Math.max(0, current - 1))}
+        disabled={current === 0}
+        className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
+          current > 0
+            ? 'border-sage text-sage hover:bg-sage hover:text-white'
+            : 'border-neutral-200 text-neutral-300 cursor-not-allowed'
+        }`}
+      >←</button>
+
+      <div className="flex gap-2">
+        {Array.from({ length: total }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => onChange(i)}
+            className={`h-2 rounded-full transition-all duration-200 ${
+              current === i ? 'bg-sage w-5' : 'bg-sage-muted w-2'
+            }`}
+          />
+        ))}
+      </div>
+
+      <button
+        onClick={() => onChange(Math.min(total - 1, current + 1))}
+        disabled={current === total - 1}
+        className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
+          current < total - 1
+            ? 'border-sage text-sage hover:bg-sage hover:text-white'
+            : 'border-neutral-200 text-neutral-300 cursor-not-allowed'
+        }`}
+      >→</button>
+    </div>
+  )
+}
+
 export default function Depoimentos() {
-  const [page, setPage] = useState(0)
   const perPage = 3
   const totalPages = Math.ceil(depoimentos.length / perPage)
+  const [desktopPage, setDesktopPage] = useState(0)
+  const [mobilePage, setMobilePage] = useState(0)
 
-  const prev = () => setPage((p) => Math.max(0, p - 1))
-  const next = () => setPage((p) => Math.min(totalPages - 1, p + 1))
-
-  const visible = depoimentos.slice(page * perPage, page * perPage + perPage)
+  const visibleDesktop = depoimentos.slice(desktopPage * perPage, desktopPage * perPage + perPage)
 
   return (
     <section className="bg-sage-pale py-20 px-6">
@@ -85,50 +121,28 @@ export default function Depoimentos() {
           </h2>
         </div>
 
-        {/* Grid — 1 coluna no mobile, 3 no desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {visible.map((d, i) => (
-            <Card key={page * perPage + i} d={d} />
-          ))}
-        </div>
-
-        {/* Controls */}
-        <div className="flex items-center justify-center gap-4">
-          <button
-            onClick={prev}
-            disabled={page === 0}
-            className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
-              page > 0
-                ? 'border-sage text-sage hover:bg-sage hover:text-white'
-                : 'border-neutral-200 text-neutral-300 cursor-not-allowed'
-            }`}
-          >
-            ←
-          </button>
-
-          <div className="flex gap-2">
-            {Array.from({ length: totalPages }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setPage(i)}
-                className={`h-2 rounded-full transition-all duration-200 ${
-                  page === i ? 'bg-sage w-5' : 'bg-sage-muted w-2'
-                }`}
-              />
+        {/* Desktop — 3 por página */}
+        <div className="hidden md:block">
+          <div className="grid grid-cols-3 gap-6">
+            {visibleDesktop.map((d, i) => (
+              <Card key={desktopPage * perPage + i} d={d} />
             ))}
           </div>
+          <Controls
+            current={desktopPage}
+            total={totalPages}
+            onChange={setDesktopPage}
+          />
+        </div>
 
-          <button
-            onClick={next}
-            disabled={page === totalPages - 1}
-            className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
-              page < totalPages - 1
-                ? 'border-sage text-sage hover:bg-sage hover:text-white'
-                : 'border-neutral-200 text-neutral-300 cursor-not-allowed'
-            }`}
-          >
-            →
-          </button>
+        {/* Mobile — 1 por vez, navega por todos os 6 */}
+        <div className="md:hidden">
+          <Card d={depoimentos[mobilePage]} />
+          <Controls
+            current={mobilePage}
+            total={depoimentos.length}
+            onChange={setMobilePage}
+          />
         </div>
       </div>
     </section>
