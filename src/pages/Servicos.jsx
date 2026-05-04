@@ -86,7 +86,7 @@ const servicos = [
     id: 'lente',
     title: 'Lente de Contato Dental',
     tag: 'Alta Estética',
-    img: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80&auto=format&fit=crop',
+    img: 'https://images.unsplash.com/photo-1660737217837-95f00b9eae53?w=800&q=80&auto=format&fit=crop',
     desc: 'A lente de contato dental é a versão mais refinada das facetas, com espessura mínima e desgaste mínimo do dente, indicada para quem busca o máximo em naturalidade.',
     beneficios: [
       'Espessura de 0,2mm — mínimo desgaste',
@@ -188,7 +188,7 @@ function Contato() {
 
           <div className="flex flex-col gap-4 mb-8">
             {[
-              { label: 'Endereço', value: 'Av. Principal, 1200 — Centro, São Paulo — SP' },
+              { label: 'Endereço', value: 'Rua Estados Unidos, 1200 — Jardim América, São Paulo — SP' },
               { label: 'Horários', value: 'Seg a Sex: 08h às 19h · Sáb: 08h às 14h' },
               { label: 'WhatsApp', value: '(11) 99992-1543' },
             ].map((i) => (
@@ -227,7 +227,7 @@ function Contato() {
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=-23.5667331,-46.5062812&z=15&output=embed"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.034155186824!2d-46.67061032395314!3d-23.56721676180873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59d700c9a711%3A0x1d2a10535cf2d329!2sR.%20Estados%20Unidos%2C%201418%20-%20Jardim%20America%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001427-001!5e0!3m2!1spt-BR!2sbr!4v1777916722563!5m2!1spt-BR!2sbr"
           />
         </div>
       </div>
